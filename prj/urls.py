@@ -20,9 +20,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    # path('jet/', include('jet.urls')),
     path('admin/', admin.site.urls),
     # path('adminapp/', include('adminapp.urls')),
     path('curd/', include('crudapp.urls')),
+    # path('forest', include('django_forest.urls')),
+    
 ] 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

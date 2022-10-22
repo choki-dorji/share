@@ -79,13 +79,13 @@ class FemaleUserDataView(APIView):
     # throttle_classes = [AnonRateThrottle]
 
     def get(self, request):
-        platform = MaleUserData.objects.filter(status = True)
-        serializer = MaleUserDataSerializer(
+        platform = FemaleUserData.objects.filter(status = True)
+        serializer = FemaleUserDataSerializer(
             platform, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = MaleUserDataSerializer(data=request.data)
+        serializer = FemaleUserDataSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save() 
 
@@ -104,12 +104,53 @@ class FemaleUserDataView(APIView):
         else:
             return Response(serializer.errors)
 
+################combines############
+class UserData(APIView):
+    # if MaleUserData.objects.filter(Gender = 'Male'):
+    #         queryset = MaleUserData.objects.filter(status = True)
+    #         serializer_class = MaleUserDataSerializer
+    # elif FemaleUserData.objects.filter(Gender= 'Female'):
+    #         queryset = FemaleUserData.objects.filter(status = True)
+    #         serializer_class = FemaleUserDataSerializer
+
+    def get(self, request):
+        platform = MaleUserData.objects.filter(status = True)
+        serializer = MaleUserDataSerializer(
+            platform, many=True, context={'request': request})
+        return Response(serializer.data)
+
+    def post(self, request):
+        if MaleUserData.objects.filter(Gender = 'Male'):
+            # queryset = MaleUserData.objects.filter(status = True)
+            # serializer_class = MaleUserDataSerializer
+            serializer = MaleUserDataSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save() 
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors)
+        elif FemaleUserData.objects.filter(Gender = 'Female'):
+            # queryset = FemaleUserData.objects.filter(status = True)
+            # serializer_class = FemaleUserDataSerializer
+            serializer = FemaleUserDataSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save() 
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors)
+
+
+        
+
+
+
+
 
 class MaleProject(generics.ListAPIView):
-    queryset = MaleUserData.objects.filter(status = True)
-    serializer_class = MaleUserDataSerializer
+    queryset = Marriage.objects.all()
+    serializer_class = MarriageSerializer
     filter_backends = [filters.SearchFilter] 
-    search_fields = ['CID']
+    search_fields = ['MarriageID']
 
 # class ReviewList(generics.ListAPIView):
 #     # queryset = Review.objects.all()
@@ -145,13 +186,14 @@ class MarriageView(APIView):
     # throttle_classes = [AnonRateThrottle]
 
     def get(self, request):
-        platform = Marriage.objects.all()
+        platform = Marriage.objects.filter(status=True)
         serializer = MarriageSerializer(
             platform, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
         serializer = MarriageSerializer(data=request.data)
+        
         if serializer.is_valid():
             serializer.save() 
             print(serializer.data)

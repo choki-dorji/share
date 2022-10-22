@@ -1,3 +1,4 @@
+from email.policy import default
 from enum import unique
 from random import choices
 from django.db import models
@@ -6,16 +7,16 @@ from django.contrib.auth.models import User
 
 
 class MaleUserData(models.Model):
-    # g = [
-    #     ('Male', 'Male'),
-    #     ('Female', 'Female')
-    #     ]
+    g = [
+        ('Male', 'Male'),
+        ('Female', 'Female')
+        ]
     CID = models.IntegerField(unique=True)
     Name = models.CharField(max_length=150)
-    DOB = models.DateTimeField()
-    # Gender = models.CharField(max_length=20,choices= g)
-    profile = models.ImageField(upload_to='image', null= True)
-    Gender = models.CharField(max_length=20, default='Male')
+    DOB = models.DateField()
+    Gender = models.CharField(max_length=20,choices= g)
+    profile = models.ImageField(upload_to='image', null= True, default=None, blank=True)
+    # Gender = models.CharField(max_length=20, default='Male')
     Village = models.CharField(max_length=100)
     Chiwog = models.CharField(max_length=100)
     ThramNo = models.CharField(max_length=100)
@@ -29,16 +30,17 @@ class MaleUserData(models.Model):
         return self.Name
 
 class FemaleUserData(models.Model):
-    # g = [
-    #     ('Male', 'Male'),
-    #     ('Female', 'Female')
-    #     ]
+    g = [
+        ('Male', 'Male'),
+        ('Female', 'Female')
+        ]
 
     CID = models.IntegerField(unique=True)
     Name = models.CharField(max_length=150)
     profile = models.ImageField(upload_to='image', null= True)
-    DOB = models.DateTimeField()
-    Gender = models.CharField(max_length=20, default='Female')
+    DOB = models.DateField()
+    Gender = models.CharField(max_length=20,choices=g)
+    # Gender = models.CharField(max_length=20, default='Female')
     Village = models.CharField(max_length=100)
     Chiwog = models.CharField(max_length=100)
     ThramNo = models.CharField(max_length=100)
@@ -60,6 +62,7 @@ class Marriage(models.Model):
     # Marriage_certificate = models.ImageField(upload_to='image')
     # Marriage_certificate1 = models.ImageField(upload_to='image')
     Marriage_certificate = models.ImageField(upload_to='image', null = True)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.YOUR_CId.Name + " & " + self.Spouce_ID.Name

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ChildDataView, MaleProject, MaleUserDataView, MarriageView, FemaleUserDataView, ChildDataView, MaleProject, TenderView, VacancyView #, success
+from .views import ChildDataView, MaleProject, MaleUserDataView, MarriageView, FemaleUserDataView, ChildDataView, MaleProject, TenderView, UserData, VacancyView #, success
 
 
 # router = DefaultRouter()
@@ -14,6 +14,7 @@ urlpatterns = [
     # path('childregister/', ChildDataView.as_view()),
     path('childregister/', ChildDataView.as_view()),
     path('search/', MaleProject.as_view()),
+     path('users/', UserData.as_view()),
 
     path('Tender/', TenderView.as_view()),
     path('vacancy/', VacancyView.as_view()),
