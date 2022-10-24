@@ -5,7 +5,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
-
 class MaleUserData(models.Model):
     g = [
         ('Male', 'Male'),
@@ -52,7 +51,8 @@ class FemaleUserData(models.Model):
 
     def __str__(self):
         return self.Name
-
+    
+  
 class Marriage(models.Model):
     MarriageID = models.CharField(max_length=100)
     # YOUR_CId = models.OneToOneField(UserData, related_name="Your_CID", on_delete=models.CASCADE)

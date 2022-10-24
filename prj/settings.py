@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'simpleui',
+    # 'simpleui',
     # 'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     # 'django_forest',
 ]
 
-
+SMS_BACKEND = 'sms.backends.console.SmsBackend'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -173,4 +173,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '12190002.gcit@rub.edu.bt'
 EMAIL_HOST_PASSWORD = 'fjiwbbexltbirqzd'
+
+
 
